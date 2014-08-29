@@ -1,4 +1,4 @@
-/*********************************************************
+/*
  * File:   main_8x8matrixv001.c
  * Authors:
  *   1)     Julio Alexander Aguilar Angulo.  juloaguilar@gmail.com
@@ -16,6 +16,7 @@
  *             - hardware target: Pedro Sanchez board (available as sch-brd)
  *      V0.01b: Spi-Like Shift Register Function Added inside main file
  *      V0.01c: Matrix Test initial Code.
+ *      V0.01d: Scrolling and negative added.
  *
  * Created on 29 août 2014, 10:25
  * Licensing based on the MIT License.
@@ -32,9 +33,9 @@
 
 #define _XTAL_FREQ 4000000 // in order to use the built-in delay (to change later)
         
-char    video_buffer[64];
+char    video_buffer[64],video_line,loop_counter;
 char    temp_X,temp_Y;
-char    i;
+char    i,index,j,k;
 void SendData(char data);
 
 void main(void) {
@@ -46,22 +47,37 @@ void main(void) {
     RowPortdir = OUTPUT_PORT;
     RowPort = 0x00;
 
-
+    i=0;j=0;k=0;index;loop_counter=0;
     while(1){
-        SendData(ColumnScan[1]);
-        RowPort=Patterns[i];
-        i++;i&=0b111;
-        __delay_ms(20);
-
+        
+        SendData(ColumnScan[i]);
+        index=i+j;
+        index%=8;
+        RowPort=Patterns[index]^video_line;
+        i++;
+        i&=0b00000111;
+        k++;
+            if (k==250)
+                {
+                    j++;
+                    j&=0b00000111;
+                    k=0;
+                    loop_counter++;
+                    if (loop_counter==16)
+                        {
+                            video_line^=0xFF;
+                            loop_counter=0;
+                        }
+                }
+        __delay_us(500);
+        RowPort=0x00;
     }
-    return;
 }
 
 
 void SendData(char data){
 unsigned char LOOP, FLAG;
 
-RowPort=0x00;
 for (LOOP=0; LOOP<8; LOOP++)
     {
      FLAG=data&0x01;
