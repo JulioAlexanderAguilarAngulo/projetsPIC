@@ -1,4 +1,4 @@
-/*
+/*********************************************************
  * File:   main_8x8matrixv001.c
  * Authors:
  *   1)     Julio Alexander Aguilar Angulo.  juloaguilar@gmail.com

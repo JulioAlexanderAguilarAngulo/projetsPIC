@@ -1,6 +1,7 @@
 Project Overview:
 
 
+	BETATESTERS (HW and SW) needed!!
 
 
 Project Members:
@@ -16,8 +17,11 @@ Acknowledgements:
 
 Tools:
 
-
-  Software:  XC8 compiler +  MPLABX IDE
+	Software:  XC8 compiler +  MPLABX IDE
   
 Code History
 
+	V0.01a: Initial Dummy Code template and structured definitions
+			- hardware target: Pedro Sanchez board (available as sch-brd)
+	V0.01b: Spi-Like Shift Register Function Added inside main file
+	V0.01c: Matrix Test initial Code.
