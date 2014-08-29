@@ -1,0 +1,5 @@
+__stringtab: STRING, 1 0 6
+_Patterns: STRING, 7 0 8
+_main: CODE, 2025 0 14
+__initialization: CODE, 2039 0 7
+Total: 35
